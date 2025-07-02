@@ -6,17 +6,17 @@ export default function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // Login handler
-  const login = (e) => {
+  // Handle form submission and "login"
+  const handleLogin = (e) => {
     e.preventDefault();
-    // Replace with real API call
+    // Dummy login: accept any email/password
     setUser({ id: 1, name: "Randeep Singh", email });
   };
 
-  // Load bills when user logs in
+  // Fetch bills after user logs in
   useEffect(() => {
     if (user) {
-      // Replace with API call
+      // Dummy data to simulate fetching bills
       const sampleBills = [
         { id: 1, name: "Hydro One", amount: 120.5, dueDate: "2025-07-10" },
         { id: 2, name: "Niagara Water", amount: 45.0, dueDate: "2025-07-15" },
@@ -27,36 +27,70 @@ export default function App() {
 
   if (!user) {
     return (
-      <form onSubmit={login}>
+      <div style={{ maxWidth: 400, margin: "auto", padding: 20 }}>
         <h2>Login</h2>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          required
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          required
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Log In</button>
-      </form>
+        <form onSubmit={handleLogin}>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            required
+            onChange={(e) => setEmail(e.target.value)}
+            style={{ width: "100%", padding: 8, marginBottom: 10 }}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            required
+            onChange={(e) => setPassword(e.target.value)}
+            style={{ width: "100%", padding: 8, marginBottom: 10 }}
+          />
+          <button
+            type="submit"
+            style={{ width: "100%", padding: 10, backgroundColor: "#007bff", color: "#fff", border: "none", cursor: "pointer" }}
+          >
+            Log In
+          </button>
+        </form>
+      </div>
     );
   }
 
   return (
-    <div>
+    <div style={{ maxWidth: 600, margin: "auto", padding: 20 }}>
       <h1>Welcome, {user.name}</h1>
       <h2>Your Bills</h2>
-      <ul>
+      <ul style={{ listStyleType: "none", padding: 0 }}>
         {bills.map((bill) => (
-          <li key={bill.id}>
-            {bill.name} - ${bill.amount} due by {bill.dueDate}{" "}
-            <button>Pay Now</button>
+          <li
+            key={bill.id}
+            style={{
+              padding: 10,
+              marginBottom: 10,
+              border: "1px solid #ccc",
+              borderRadius: 5,
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <div>
+              <strong>{bill.name}</strong> - ${bill.amount.toFixed(2)} due by {bill.dueDate}
+            </div>
+            <button
+              style={{
+                padding: "6px 12px",
+                backgroundColor: "#28a745",
+                color: "#fff",
+                border: "none",
+                borderRadius: 3,
+                cursor: "pointer",
+              }}
+              onClick={() => alert(`Paying ${bill.name} bill of $${bill.amount.toFixed(2)}`)}
+            >
+              Pay Now
+            </button>
           </li>
         ))}
       </ul>
