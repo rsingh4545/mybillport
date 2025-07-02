@@ -1,22 +1,20 @@
 import React, { useState, useEffect } from "react";
 
-export default function App() {
+function App() {
   const [user, setUser] = useState(null);
   const [bills, setBills] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // Handle form submission and "login"
   const handleLogin = (e) => {
     e.preventDefault();
-    // Dummy login: accept any email/password
+    // Dummy login, accepts any email and password
     setUser({ id: 1, name: "Randeep Singh", email });
   };
 
-  // Fetch bills after user logs in
   useEffect(() => {
     if (user) {
-      // Dummy data to simulate fetching bills
+      // Simulate fetching bills
       const sampleBills = [
         { id: 1, name: "Hydro One", amount: 120.5, dueDate: "2025-07-10" },
         { id: 2, name: "Niagara Water", amount: 45.0, dueDate: "2025-07-15" },
@@ -48,7 +46,14 @@ export default function App() {
           />
           <button
             type="submit"
-            style={{ width: "100%", padding: 10, backgroundColor: "#007bff", color: "#fff", border: "none", cursor: "pointer" }}
+            style={{
+              width: "100%",
+              padding: 10,
+              backgroundColor: "#007bff",
+              color: "white",
+              border: "none",
+              cursor: "pointer",
+            }}
           >
             Log In
           </button>
@@ -76,18 +81,21 @@ export default function App() {
             }}
           >
             <div>
-              <strong>{bill.name}</strong> - ${bill.amount.toFixed(2)} due by {bill.dueDate}
+              <strong>{bill.name}</strong> - ${bill.amount.toFixed(2)} due by{" "}
+              {bill.dueDate}
             </div>
             <button
               style={{
                 padding: "6px 12px",
                 backgroundColor: "#28a745",
-                color: "#fff",
+                color: "white",
                 border: "none",
                 borderRadius: 3,
                 cursor: "pointer",
               }}
-              onClick={() => alert(`Paying ${bill.name} bill of $${bill.amount.toFixed(2)}`)}
+              onClick={() =>
+                alert(`Paying ${bill.name} bill of $${bill.amount.toFixed(2)}`)
+              }
             >
               Pay Now
             </button>
@@ -97,3 +105,5 @@ export default function App() {
     </div>
   );
 }
+
+export default App;
