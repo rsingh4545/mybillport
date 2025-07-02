@@ -1,45 +1,4 @@
-// src/App.js
 import React, { useState, useEffect } from "react";
-
-function App() {
-  const [user, setUser] = useState(null);
-  const [bills, setBills] = useState([]);
-
-  // Simulate login
-  const login = async (email, password) => {
-    // Call backend API here to authenticate
-    // For demo, assume success
-    setUser({ id: 1, name: "Randeep Singh", email });
-  };
-
-  // Fetch bills after login
-  useEffect(() => {
-    if (user) {
-      fetchBills();
-    }
-  }, [user]);
-
-  const fetchBills = async () => {
-    // Call backend API to fetch bills for user
-    // Example dummy data:
-    const sampleBills = [
-      { id: 1, name: "Hydro One", amount: 120.5, dueDate: "2025-07-10" },
-      { id: 2, name: "Niagara Water", amount: 45.0, dueDate: "2025-07-15" },
-    ];
-    setBills(sampleBills);
-  };
-
-  if (!user) {
-    return <LoginForm onLogin={login} />;
-  }
-
-  return (
-    <div>
-      <h1>Welcome, {user.name}</h1>
-      <BillList bills={bills} />
-    </div>
-  );
-}
 
 function LoginForm({ onLogin }) {
   const [email, setEmail] = useState("");
@@ -79,7 +38,7 @@ function BillList({ bills }) {
       <ul>
         {bills.map((bill) => (
           <li key={bill.id}>
-            {bill.name} - ${bill.amount} due by {bill.dueDate}
+            {bill.name} - ${bill.amount} due by {bill.dueDate}{" "}
             <button>Pay Now</button>
           </li>
         ))}
@@ -88,4 +47,39 @@ function BillList({ bills }) {
   );
 }
 
-export default App;
+export default function App() {
+  const [user, setUser] = useState(null);
+  const [bills, setBills] = useState([]);
+
+  // Dummy login function
+  const login = async (email, password) => {
+    // Replace this with real API call
+    setUser({ id: 1, name: "Randeep Singh", email });
+  };
+
+  useEffect(() => {
+    if (user) {
+      fetchBills();
+    }
+  }, [user]);
+
+  const fetchBills = async () => {
+    // Replace with API call to get bills for the user
+    const sampleBills = [
+      { id: 1, name: "Hydro One", amount: 120.5, dueDate: "2025-07-10" },
+      { id: 2, name: "Niagara Water", amount: 45.0, dueDate: "2025-07-15" },
+    ];
+    setBills(sampleBills);
+  };
+
+  if (!user) {
+    return <LoginForm onLogin={login} />;
+  }
+
+  return (
+    <div>
+      <h1>Welcome, {user.name}</h1>
+      <BillList bills={bills} />
+    </div>
+  );
+}
