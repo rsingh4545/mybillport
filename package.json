@@ -1,65 +1,16 @@
-import React, { useState, useEffect } from "react";
-
-export default function App() {
-  const [user, setUser] = useState(null);
-  const [bills, setBills] = useState([]);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  // Login handler
-  const login = (e) => {
-    e.preventDefault();
-    // Replace with real API call
-    setUser({ id: 1, name: "Randeep Singh", email });
-  };
-
-  // Load bills when user logs in
-  useEffect(() => {
-    if (user) {
-      // Replace with API call
-      const sampleBills = [
-        { id: 1, name: "Hydro One", amount: 120.5, dueDate: "2025-07-10" },
-        { id: 2, name: "Niagara Water", amount: 45.0, dueDate: "2025-07-15" },
-      ];
-      setBills(sampleBills);
-    }
-  }, [user]);
-
-  if (!user) {
-    return (
-      <form onSubmit={login}>
-        <h2>Login</h2>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          required
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          required
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Log In</button>
-      </form>
-    );
+{
+  "name": "mybillport",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   }
-
-  return (
-    <div>
-      <h1>Welcome, {user.name}</h1>
-      <h2>Your Bills</h2>
-      <ul>
-        {bills.map((bill) => (
-          <li key={bill.id}>
-            {bill.name} - ${bill.amount} due by {bill.dueDate}{" "}
-            <button>Pay Now</button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
 }
