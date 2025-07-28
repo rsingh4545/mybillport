@@ -1,22 +1,23 @@
+import React from 'react';
 import BillItem from '../components/BillItem';
-import '../styles/global.css';
 
-export default function Home() {
-  const bills = [
-    { name: "Hydro", amount: 120, due: "July 7" },
-    { name: "Enbridge", amount: 85, due: "July 10" },
-    { name: "Wi-Fi", amount: 60, due: "July 14" },
-    { name: "Credit Card", amount: 220, due: "July 5" }
-  ];
+const bills = [
+  { id: 1, name: 'Hydro One', type: 'Electricity', amount: 164.5, dueDate: 'Jun 20', priority: 'urgent' },
+  { id: 2, name: 'Rogers Internet', type: 'Internet', amount: 89.99, dueDate: 'Jun 25', priority: 'medium' },
+  { id: 3, name: 'Enbridge Gas', type: 'Gas', amount: 76.25, dueDate: 'Jun 28', priority: 'low' },
+];
 
+const HomePage = () => {
   return (
-    <div className="container">
-      <img src="/logo.png" alt="MyBillPort Logo" style={{ width: '180px', marginBottom: '20px' }} />
-      <h1>MyBillPort</h1>
-      {bills.map((bill, i) => (
-        <BillItem key={i} {...bill} />
-      ))}
-      <button className="pay-all">Pay All Now</button>
+    <div className="p-6">
+      <h1 className="text-3xl font-bold mb-4">MyBillPort Dashboard</h1>
+      <div className="space-y-4">
+        {bills.map((bill) => (
+          <BillItem key={bill.id} bill={bill} />
+        ))}
+      </div>
     </div>
   );
-}
+};
+
+export default HomePage; 
